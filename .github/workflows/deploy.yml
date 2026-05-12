@@ -35,7 +35,7 @@ jobs:
         npm ci
         npm run build
 
-    - name: Create .env for build
+    - name: Create production .env
       run: |
         echo "APP_NAME=SwiftSite" > .env
         echo "APP_ENV=production" >> .env
@@ -43,22 +43,20 @@ jobs:
         echo "APP_DEBUG=false" >> .env
         echo "DB_CONNECTION=mysql" >> .env
 
-    - name: Remove dev files before deploy
-      run: |
-        rm -rf node_modules
-        rm -rf tests
+    - name: Clean up dev files
+      run: rm -rf node_modules tests
 
     - name: Login to Azure
       uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
-    - name: Deploy to Azure
+    - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v3
       with:
         app-name: 'swiftsite'
         package: .
 
-    - name: Azure logout
-      run: az logout
+    - name: Logout
       if: always()
+      run: az logout
