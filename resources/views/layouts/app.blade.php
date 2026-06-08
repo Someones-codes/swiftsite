@@ -260,24 +260,7 @@
 </head>
 <body>
 
-    {{-- NAVIGATION --}}
-    <nav class="main-nav">
-        <a href="{{ route('home') }}" class="nav-brand">
-            <div class="nav-logo">S</div>
-            <span class="nav-brand-name">Swift<span>Site</span></span>
-        </a>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-            <li><a href="{{ route('portfolio') }}" class="{{ request()->routeIs('portfolio') ? 'active' : '' }}">Portfolio</a></li>
-            <li><a href="{{ route('demos') }}" class="{{ request()->routeIs('demos') ? 'active' : '' }}">Live Demos</a></li>
-            <li><a href="{{ route('contact') }}" class="nav-cta">Hire Me</a></li>
-        </ul>
-
-        <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
 
     {{-- FLASH MESSAGES --}}
     @if(session('success'))
@@ -289,41 +272,11 @@
 
     {{-- PAGE CONTENT --}}
     <main>
+        @include('components.navbar')
         @yield('content')
     </main>
 
-    {{-- FOOTER --}}
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-brand-name">Swift<span>Site</span> Designs</div>
-                    <p>Building fast, modern, and affordable web systems for South African businesses. From finance trackers to full CRM systems.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigate</h4>
-                    <ul>
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
-                        <li><a href="{{ route('demos') }}">Live Demos</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Live Demos</h4>
-                    <ul>
-                        <li><a href="{{ route('demo.finance.index') }}">Finance Tracker</a></li>
-                        <li><a href="{{ route('demo.water.index') }}">Water Drum Tracker</a></li>
-                        <li><a href="{{ route('demo.blog.index') }}">Family Link Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>© {{ date('Y') }} SwiftSite Designs · Prince Chishanga · Howick, KZN</span>
-                <a href="{{ route('contact') }}">Let's build something →</a>
-            </div>
-        </div>
-    </footer>
+
 
     @stack('scripts')
 </body>

@@ -137,13 +137,13 @@
     {{-- LEFT: Contact Info --}}
     <div class="contact-info">
         <h2>Contact Details</h2>
-        <p>I'm a full-stack developer based in Howick, KZN. I work with small businesses, startups, and individuals across South Africa to build web systems that actually make a difference.</p>
+        <p>I'm a full-stack developer based in Durban, KZN. I work with small businesses, startups, and individuals across South Africa to build web systems that actually make a difference.</p>
 
         <div class="contact-item">
             <div class="contact-icon">📍</div>
             <div>
                 <h4>Location</h4>
-                <p>Howick, KwaZulu-Natal, South Africa</p>
+                <p>Durban, KwaZulu-Natal, South Africa</p>
             </div>
         </div>
 

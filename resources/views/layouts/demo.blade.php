@@ -345,14 +345,7 @@
 </head>
 <body>
 
-    {{-- DEMO ALERT BANNER --}}
-    <div class="demo-banner">
-        <span>🔬 <strong>DEMO MODE</strong> — All data resets every 30 minutes. This is a demonstration system.</span>
-        <div class="demo-banner-links">
-            <a href="{{ route('demos') }}">← All Demos</a>
-            <a href="{{ route('home') }}">Portfolio</a>
-        </div>
-    </div>
+   
 
     {{-- DEMO APP TOPBAR --}}
     <div class="demo-topbar">
@@ -375,20 +368,11 @@
 
     {{-- PAGE CONTENT --}}
     <div class="demo-content">
+
+
         @yield('content')
     </div>
 
-    {{-- FLOATING CTA — appears on ALL demo pages --}}
-    <div class="floating-cta" id="floatingCta">
-        <div class="floating-cta-inner" style="position:relative;">
-            <button class="cta-dismiss" onclick="document.getElementById('floatingCta').style.display='none'" title="Dismiss">✕</button>
-            <div class="cta-label">💡 Like what you see?</div>
-            <div class="cta-headline">Need a system like this for your business?</div>
-            <a href="{{ route('contact') }}?ref=demo-{{ request()->segment(2) }}" class="cta-btn">
-                Get a Website Like This →
-            </a>
-        </div>
-    </div>
 
     @stack('scripts')
 </body>

@@ -10,7 +10,9 @@ use App\Http\Controllers\Portfolio\ContactController;
 // PUBLIC PORTFOLIO ROUTES
 // =============================================
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('portfolio.home');
+})->name('home');
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/demos', [HomeController::class, 'demos'])->name('demos');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');

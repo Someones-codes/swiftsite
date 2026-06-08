@@ -8,9 +8,10 @@
     "require": {
         "php": "^8.2",
         "intervention/image-laravel": "^1.5",
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^12.61",
         "laravel/tinker": "^2.10.1",
         "matthewbdaly/laravel-azure-storage": "*",
+        "nesbot/carbon": "*",
         "spatie/laravel-permission": "^6.25"
     },
     "require-dev": {
