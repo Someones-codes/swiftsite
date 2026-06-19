@@ -3,6 +3,34 @@
 @section('title', 'Prince Chishanga - Software Developer Portfolio')
 
 @section('content')
+<nav style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(40,114,161,0.08);
+">
+    <div style="font-weight: 800; color: var(--ocean); font-size: 1.2rem;">PC</div>
+    <div style="display: flex; gap: 30px;" id="nav-links">
+        <a href="#about" style="color: var(--dark); text-decoration: none; font-weight: 600; font-size: 0.95rem;">About</a>
+        <a href="#skills" style="color: var(--dark); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Skills</a>
+        <a href="#projects" style="color: var(--dark); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Projects</a>
+        <a href="#contact" style="color: var(--dark); text-decoration: none; font-weight: 600; font-size: 0.95rem;">Contact</a>
+    </div>
+</nav>
+
+<style>
+    @media (max-width: 768px) {
+        #nav-links { display: none; }
+    }
+</style>
 
 <style>
     :root {
@@ -34,6 +62,7 @@
         padding: 40px 20px;
         position: relative;
         overflow: hidden;
+        padding-top: 70px;
     }
 
     .hero::before {
@@ -555,11 +584,35 @@
             passionate about creating innovative software solutions that make a meaningful impact.
         </p>
         <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">See My Work</a>
-            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-        </div>
+    <a href="#projects" class="btn btn-primary">See My Work</a>
+    <a href="{{ route('cv.download') }}" class="btn btn-secondary">Download CV</a>
+    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+</div>
     </div>
 </section>
+
+<button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--ocean);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 5px 20px rgba(40,114,161,0.3);
+">↑</button>
+
+<script>
+    window.addEventListener('scroll', () => {
+        document.getElementById('backToTop').style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+</script>
 
 <!-- ═══════════════════════════════ ABOUT ═══════════════════════════════ -->
 <section id="about" class="section about">
@@ -941,6 +994,7 @@
     </div>
 </section>
 
+
 <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
 <section id="contact" class="section contact">
     <h2 class="section-title">Let's Build Something Meaningful</h2>
@@ -952,13 +1006,23 @@
 
         <div class="contact-links">
             <a href="mailto:pchishanga2020@gmail.com" class="contact-link">
-                📧 Email Me
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Email Me
             </a>
             <a href="https://github.com/Someones-codes" target="_blank" class="contact-link">
-                💻 GitHub Profile
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.62.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                GitHub Profile
             </a>
             <a href="https://www.linkedin.com/in/prince-chishanga-478b20344" target="_blank" class="contact-link">
-                💼 LinkedIn
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
             </a>
         </div>
 
@@ -972,5 +1036,43 @@
         Building innovative software solutions | Based in Durban, South Africa 🇿🇦
     </p>
 </footer>
+
+<script>
+    const observerOptions = { threshold: 0.15 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+    });
+</script>
+
+<script>
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const fills = entry.target.querySelectorAll('.progress-fill');
+                fills.forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0%';
+                    setTimeout(() => fill.style.width = width, 100);
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skill-category').forEach(cat => {
+        skillObserver.observe(cat);
+    });
+</script>
 
 @endsection
