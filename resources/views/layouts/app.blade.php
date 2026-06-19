@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Prince Chishanga — Software Developer & BSc IT Student building full-stack web applications with Laravel, PHP, and MySQL.">
+<title>@yield('title', 'Prince Chishanga') | Software Developer</title>
+<meta name="description" content="@yield('meta_description', 'Prince Chishanga — Software Developer & BSc IT Student building full-stack web applications with Laravel, PHP, and MySQL.')">
 <meta name="keywords" content="Prince Chishanga, software developer, Laravel developer, web developer South Africa">
 <meta property="og:title" content="Prince Chishanga - Software Developer">
 <meta property="og:description" content="Full-stack developer building practical solutions with Laravel and modern web technologies.">
-    <title>@yield('title', 'SwiftSite Designs') | Prince Chishanga</title>
-    <meta name="description" content="@yield('meta_description', 'Full-stack web developer building fast, modern systems for South African businesses.')">
-
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -276,7 +272,7 @@
 
     {{-- PAGE CONTENT --}}
     <main>
-        @include('components.navbar')
+   
         @yield('content')
     </main>
 
