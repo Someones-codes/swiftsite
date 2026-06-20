@@ -4,15 +4,8 @@
 @section('demo-icon', '📊')
 @section('demo-name', 'Student Finance Tracker')
 
-@section('demo-nav')
-    <li><a href="{{ route('demo.finance.index') }}" class="active">Dashboard</a></li>
-    <li><a href="{{ route('demos') }}">← All Demos</a></li>
-@endsection
-
 @push('styles')
 <style>
-    .finance-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; }
-
     .balance-bar {
         height: 8px; border-radius: 10px; overflow: hidden;
         background: var(--border); margin-top: 16px;
@@ -25,44 +18,41 @@
 
     .tab-bar { display:flex; gap:8px; margin-bottom:16px; }
     .tab-btn {
-        padding:7px 18px; border-radius:30px; font-size:13px;
+        padding:7px 16px; border-radius:30px; font-size:0.8rem;
         font-weight:600; border:none; cursor:pointer;
         background:var(--light); color:var(--gray);
         transition:all 0.2s; font-family:'DM Sans',sans-serif;
+        white-space: nowrap;
     }
-    .tab-btn.active { background:var(--navy2); color:white; }
+    .tab-btn.active { background:var(--ocean); color:white; }
 
-    .tx-list { list-style:none; }
+    .tx-list { list-style:none; margin:0; padding:0; }
     .tx-item {
-        display:flex; align-items:center; gap:12px;
+        display:flex; align-items:center; gap:10px;
         padding:12px 0; border-bottom:1px solid var(--border);
     }
     .tx-item:last-child { border-bottom:none; }
 
     .tx-icon {
-        width:36px; height:36px; border-radius:50%;
+        width:34px; height:34px; border-radius:50%;
         display:flex; align-items:center; justify-content:center;
-        font-size:16px; flex-shrink:0;
+        font-size:15px; flex-shrink:0;
     }
     .tx-icon.income  { background:#d1fae5; }
     .tx-icon.expense { background:#fee2e2; }
 
-    .tx-label { flex:1; }
-    .tx-label strong { display:block; font-size:14px; color:var(--dark); }
-    .tx-label small  { font-size:12px; color:var(--gray); }
+    .tx-label { flex:1; min-width: 0; }
+    .tx-label strong { display:block; font-size:0.85rem; color:var(--dark); word-break: break-word; }
+    .tx-label small  { font-size:0.75rem; color:var(--gray); }
 
-    .tx-amount { font-weight:700; font-size:14px; white-space:nowrap; }
+    .tx-amount { font-weight:700; font-size:0.85rem; white-space:nowrap; }
 
     .delete-btn {
         background:none; border:none; cursor:pointer;
         color:var(--gray); font-size:14px; padding:4px 8px;
-        border-radius:6px; transition:all 0.15s;
+        border-radius:6px; transition:all 0.15s; flex-shrink: 0;
     }
     .delete-btn:hover { background:#fee2e2; color:var(--red); }
-
-    .empty-tx { text-align:center; padding:32px 16px; color:var(--gray); }
-    .empty-tx .e-icon { font-size:36px; margin-bottom:8px; }
-    .empty-tx p { font-size:14px; }
 </style>
 @endpush
 
@@ -74,32 +64,31 @@
 </div>
 
 <div class="reset-notice">
-    ⏱ Demo data resets every 30 minutes &nbsp;·&nbsp; Your Session: <code style="background:rgba(26,35,126,0.08);padding:2px 8px;border-radius:4px;font-size:11px;">{{ substr(session('demo_session_id'), 0, 16) }}...</code>
+    ⏱ Demo data resets every 30 minutes &nbsp;·&nbsp; Session: <code style="background:rgba(40,114,161,0.08);padding:2px 6px;border-radius:4px;font-size:0.7rem;">{{ substr(session('demo_session_id'), 0, 14) }}...</code>
 </div>
 
 {{-- SUMMARY CARDS --}}
 <div class="stat-cards">
     <div class="stat-card income">
-        <div class="label">💰 Total Income</div>
+        <div class="label">💰 Income</div>
         <div class="value">R {{ number_format($totalIncome, 2) }}</div>
     </div>
     <div class="stat-card expense">
-        <div class="label">📤 Total Expenses</div>
+        <div class="label">📤 Expenses</div>
         <div class="value">R {{ number_format($totalExpenses, 2) }}</div>
     </div>
     <div class="stat-card balance" style="{{ $balance < 0 ? 'border-color:var(--red);' : '' }}">
         <div class="label">{{ $balance >= 0 ? '✅' : '⚠️' }} Balance</div>
-        <div class="value" style="color:{{ $balance >= 0 ? 'var(--navy2)' : 'var(--red)' }}">
+        <div class="value" style="color:{{ $balance >= 0 ? 'var(--ocean)' : 'var(--red)' }}">
             R {{ number_format(abs($balance), 2) }}
             {{ $balance < 0 ? '(overdrawn)' : '' }}
         </div>
     </div>
 </div>
 
-{{-- Balance Progress Bar --}}
 @if($totalIncome > 0)
-<div style="background:white;border-radius:12px;border:1px solid var(--border);padding:16px 20px;margin-bottom:24px;">
-    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--gray);margin-bottom:8px;">
+<div style="background:white;border-radius:12px;border:1px solid var(--border);padding:16px 18px;margin-bottom:24px;">
+    <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--gray);margin-bottom:8px;">
         <span>Expenses vs Income</span>
         <span>{{ $totalIncome > 0 ? round(($totalExpenses / $totalIncome) * 100) : 0 }}% spent</span>
     </div>
@@ -112,17 +101,12 @@
 </div>
 @endif
 
-{{-- MAIN GRID --}}
 <div class="finance-grid">
 
-    {{-- LEFT: FORMS --}}
     <div style="display:flex;flex-direction:column;gap:16px;">
 
-        {{-- Add Income --}}
         <div class="card">
-            <div class="card-header">
-                <h2>💰 Add Income</h2>
-            </div>
+            <div class="card-header"><h2>💰 Add Income</h2></div>
             <div class="card-body">
                 <form action="{{ route('demo.finance.income.store') }}" method="POST">
                     @csrf
@@ -150,11 +134,8 @@
             </div>
         </div>
 
-        {{-- Add Expense --}}
         <div class="card">
-            <div class="card-header">
-                <h2>📤 Add Expense</h2>
-            </div>
+            <div class="card-header"><h2>📤 Add Expense</h2></div>
             <div class="card-body">
                 <form action="{{ route('demo.finance.expense.store') }}" method="POST">
                     @csrf
@@ -189,33 +170,27 @@
 
     </div>
 
-    {{-- RIGHT: TRANSACTION HISTORY --}}
     <div class="card">
         <div class="card-header">
             <h2>📋 Transaction History</h2>
-            <span style="font-size:13px;color:var(--gray);">{{ $incomes->count() + $expenses->count() }} total</span>
+            <span style="font-size:0.8rem;color:var(--gray);">{{ $incomes->count() + $expenses->count() }} total</span>
         </div>
-        <div class="card-body" style="padding:16px 20px;">
+        <div class="card-body">
 
             <div class="tab-bar">
-                <button class="tab-btn active" onclick="showTab('all', this)">All</button>
-                <button class="tab-btn" onclick="showTab('income', this)">Income ({{ $incomes->count() }})</button>
-                <button class="tab-btn" onclick="showTab('expense', this)">Expenses ({{ $expenses->count() }})</button>
+                <button class="tab-btn active" data-tab-type="all">All</button>
+                <button class="tab-btn" data-tab-type="income">Income ({{ $incomes->count() }})</button>
+                <button class="tab-btn" data-tab-type="expense">Expenses ({{ $expenses->count() }})</button>
             </div>
 
-            {{-- ALL TRANSACTIONS MERGED --}}
             @php
                 $allTx = collect();
-                foreach($incomes as $i) {
-                    $allTx->push(['type'=>'income','data'=>$i]);
-                }
-                foreach($expenses as $e) {
-                    $allTx->push(['type'=>'expense','data'=>$e]);
-                }
+                foreach($incomes as $i) { $allTx->push(['type'=>'income','data'=>$i]); }
+                foreach($expenses as $e) { $allTx->push(['type'=>'expense','data'=>$e]); }
                 $allTx = $allTx->sortByDesc(fn($t) => $t['data']->created_at);
             @endphp
 
-            <ul class="tx-list" id="tab-all">
+            <ul class="tx-list">
                 @forelse($allTx as $tx)
                 <li class="tx-item" data-type="{{ $tx['type'] }}">
                     <div class="tx-icon {{ $tx['type'] }}">
@@ -253,15 +228,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-function showTab(type, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.tx-item').forEach(item => {
-        item.style.display = (type === 'all' || item.dataset.type === type) ? '' : 'none';
-    });
-}
-</script>
-@endpush

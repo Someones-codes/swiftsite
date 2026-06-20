@@ -4,14 +4,14 @@
 @push('styles')
 <style>
     .demos-hero {
-        background: linear-gradient(135deg, var(--navy) 0%, #1a237e 60%, #c62828 100%);
+        background: linear-gradient(135deg, var(--dark) 0%, var(--navy2) 60%, #1e5a8e 100%);
         padding: 72px 5%; text-align: center; position: relative; overflow: hidden;
     }
 
     .demos-hero::before {
         content: '';
         position: absolute; inset: 0;
-        background: radial-gradient(ellipse at 70% 30%, rgba(240,165,0,0.15) 0%, transparent 60%);
+        background: radial-gradient(ellipse at 70% 30%, rgba(203,221,233,0.25) 0%, transparent 60%);
     }
 
     .demos-hero h1 {
@@ -61,9 +61,9 @@
         position: relative;
     }
 
-    .demo-card-hero.finance  { background: linear-gradient(135deg, #0d1b4b, #1565c0); }
-    .demo-card-hero.water    { background: linear-gradient(135deg, #0d4b3a, #00695c); }
-    .demo-card-hero.blog     { background: linear-gradient(135deg, #4a0d4b, #6a1b9a); }
+    .demo-card-hero.finance  { background: linear-gradient(135deg, #1a3a52, #2872A1); }
+    .demo-card-hero.water    { background: linear-gradient(135deg, #0d4b3a, #00897b); }
+    .demo-card-hero.blog     { background: linear-gradient(135deg, #2872A1, #4a9fd1); }
 
     .demo-big-icon { font-size: 64px; margin-bottom: 16px; line-height: 1; }
 
@@ -130,14 +130,14 @@
         transition: all 0.2s;
     }
 
-    .demo-try-btn.finance { background: #1a237e; color: white; }
-    .demo-try-btn.finance:hover { background: #0d1b6e; }
-
-    .demo-try-btn.water { background: #00695c; color: white; }
-    .demo-try-btn.water:hover { background: #004d40; }
-
-    .demo-try-btn.blog { background: #6a1b9a; color: white; }
-    .demo-try-btn.blog:hover { background: #4a148c; }
+    .demo-try-btn.finance { background: #2872A1; color: white; }
+    .demo-try-btn.finance:hover { background: #1a3a52; }
+ 
+    .demo-try-btn.water { background: #00897b; color: white; }
+    .demo-try-btn.water:hover { background: #00695c; }
+ 
+    .demo-try-btn.blog { background: #4a9fd1; color: white; }
+    .demo-try-btn.blog:hover { background: #2872A1; }
 
     /* ── HOW IT WORKS ── */
     .how-section {
