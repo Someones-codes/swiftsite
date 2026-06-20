@@ -51,3 +51,11 @@ CMD php artisan config:cache && \
     php artisan migrate --force && \
     php artisan storage:link && \
     apache2-foreground
+
+
+# Install and build frontend assets
+RUN npm install && npm run build
+
+# DEBUG: list what's actually in public/ after build
+RUN ls -la /var/www/html/public/css/ || echo "css folder missing!"
+RUN ls -la /var/www/html/public/js/ || echo "js folder missing!"
