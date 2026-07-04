@@ -16,12 +16,16 @@ class PortfolioController extends Controller
         return view('portfolio', compact('projects', 'activeCv'));
     }
  
-    public function downloadCv(): StreamedResponse
-    {
-        $cv = CvFile::where('is_active', true)->latest()->firstOrFail();
- 
-        return response()->streamDownload(function () use ($cv) {
-            echo \Illuminate\Support\Facades\Storage::disk('public')->get($cv->file_path);
-        }, $cv->original_name, ['Content-Type' => 'application/pdf']);
-    }
+   public function downloadCv(): StreamedResponse
+{
+    $cv = CvFile::where('is_active', true)->latest()->firstOrFail();
+
+    $downloadName = 'PRINCE_CHISHANGA_CV.pdf';
+
+    return response()->streamDownload(function () use ($cv) {
+        echo \Illuminate\Support\Facades\Storage::disk('public')->get($cv->file_path);
+    }, $downloadName, [
+        'Content-Type' => 'application/pdf',
+    ]);
+}
 }
