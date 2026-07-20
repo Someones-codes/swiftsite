@@ -36,3 +36,4 @@ CMD php artisan view:clear && \
     php artisan migrate --force && \
     php artisan storage:link && \
     apache2-foreground
+    
