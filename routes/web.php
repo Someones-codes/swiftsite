@@ -6,6 +6,14 @@ use App\Http\Controllers\Portfolio\HomeController;
 use App\Http\Controllers\Portfolio\PortfolioController;
 use App\Http\Controllers\Portfolio\ContactController;
 
+
+Route::get('/health', function () {
+    return response()->json([
+        'status'   => 'ok',
+        'app_key'  => config('app.key') ? 'set' : 'MISSING',
+        'db'       => function_exists('app') ? 'checking' : 'unknown',
+    ]);
+});
 // =============================================
 // PUBLIC PORTFOLIO ROUTES
 // =============================================
