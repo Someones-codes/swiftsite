@@ -51,3 +51,20 @@ CMD chmod -R 777 /var/www/html/storage \
     && php artisan migrate --force \
     && php-fpm -D \
     && nginx -g "daemon off;"
+
+
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    nodejs \
+    npm \
+    nginx \
+    supervisor \
+    default-mysql-client \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
