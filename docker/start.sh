@@ -22,5 +22,5 @@ php artisan migrate --force
 echo "==> Linking storage..."
 php artisan storage:link || true
 
-echo "==> Starting services..."
+echo "==> Starting supervisord..."
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
